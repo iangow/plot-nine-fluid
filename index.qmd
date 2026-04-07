@@ -5,6 +5,7 @@ jupyter: plotnine-fluid
 # Demonstrating an alternative methods-based interface for `plotnine`.
 
 This is a small Quarto site for Demonstrating an alternative methods-based interface for `plotnine` (which Codex insists on calling the "fluent" `plotnine` API). 
+The `plotnine` used here comes from the [codex-fluent-api](https://github.com/iangow/plotnine/tree/codex-fluent-api) branch on a fork of the official `plotnine`.
 
 The basic idea is that `from plotnine import *` is no longer needed and that `+` with functions is replaced by method calls.
 One hope is that this makes `plotnine` feel more Pythonic.
