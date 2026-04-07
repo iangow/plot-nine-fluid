@@ -1,12 +1,16 @@
 ---
-title: "plotnine-fluid"
+jupyter: plotnine-fluid
 ---
 
-# plotnine-fluid
+# Demonstrating an alternative methods-based interface for `plotnine`.
 
-`plotnine-fluid` is a small Quarto site for experimenting with the fluent
-`plotnine` API. The notebooks here adapt examples from the plotnine gallery and
-guide pages, with Polars used where it makes the data prep cleaner.
+This is a small Quarto site for Demonstrating an alternative methods-based interface for `plotnine` (which Codex insists on calling the "fluent" `plotnine` API). 
+
+The basic idea is that `from plotnine import *` is no longer needed and that `+` with functions is replaced by method calls.
+One hope is that this makes `plotnine` feel more Pythonic.
+I wrote about the perception that `plotnine` is "not Pythonic" [here](https://iangow.github.io/notes/plotnine_test/plotnine_testone.html).
+
+The notebooks here adapt examples from the plotnine gallery and guide pages, with Polars used where it makes the data prep cleaner.
 
 ## Gallery Adaptations
 

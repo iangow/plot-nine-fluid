@@ -26,7 +26,7 @@ website:
         text: Facets
     right:
       - icon: github
-        href: https://github.com/iangow/plotnine
+        href: https://github.com/iangow/plot-nine-fluid
 
 format:
   html:
