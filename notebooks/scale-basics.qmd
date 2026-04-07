@@ -3,7 +3,7 @@ title: "Scales, Legends, and Guides"
 format:
   html:
     code-tools: true
-jupyter: python3
+jupyter: plotnine-fluid
 ---
 
 This notebook adapts the plotnine guide on scales, legends, and guides to the

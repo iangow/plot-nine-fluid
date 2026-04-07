@@ -3,7 +3,7 @@ title: "Facets (Subplots)"
 format:
   html:
     code-tools: true
-jupyter: python3
+jupyter: plotnine-fluid
 ---
 
 This notebook adapts the plotnine guide on facets to the fluent API style.

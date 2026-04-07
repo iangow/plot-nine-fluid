@@ -3,7 +3,7 @@ title: "Anscombe's Quartet"
 format:
   html:
     code-tools: true
-jupyter: python3
+jupyter: plotnine-fluid
 ---
 
 In 1973, Francis Anscombe introduced four small datasets with nearly identical

@@ -3,7 +3,7 @@ title: "Please, I Want Some More Labels"
 format:
   html:
     code-tools: true
-jupyter: python3
+jupyter: plotnine-fluid
 ---
 
 This notebook adapts the plotnine gallery example on layered chart labels to the

@@ -3,7 +3,7 @@ title: "A Bar Plot With 2 Variables"
 format:
   html:
     code-tools: true
-jupyter: python3
+jupyter: plotnine-fluid
 ---
 
 This notebook adapts the plotnine gallery example on grouped bar labels, using

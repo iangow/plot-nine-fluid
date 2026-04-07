@@ -3,7 +3,7 @@ title: "Aesthetic Mappings"
 format:
   html:
     code-tools: true
-jupyter: python3
+jupyter: plotnine-fluid
 ---
 
 This notebook adapts the plotnine guide on aesthetic mappings to the fluent API
