@@ -10,3 +10,4 @@ _site/
 **/*.quarto_ipynb*
 
 **/*.quarto_ipynb
+plotnine_fluid.egg-info/
