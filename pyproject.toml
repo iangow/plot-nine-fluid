@@ -1,0 +1,16 @@
+[project]
+name = "plotnine-fluid"
+version = "0.1.0"
+description = "A Quarto website for plotnine fluent API experiments"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "jupyter>=1.1.1",
+  "plotnine[extra] @ git+https://github.com/iangow/plotnine.git@codex-fluent-api",
+  "polars>=1.30.0",
+  "scikit-learn>=1.7.0",
+]
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"

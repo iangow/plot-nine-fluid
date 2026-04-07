@@ -1,0 +1,28 @@
+---
+title: "plotnine-fluid"
+---
+
+# plotnine-fluid
+
+This site is a small home for plotnine examples built as Quarto notebooks.
+
+Start with [Anscombe's Quartet](notebooks/anscombes-quartet.qmd), adapted from the
+plotnine gallery.
+
+You can also explore [Please, I Want Some More Labels](notebooks/please-i-want-some-more-labels.qmd),
+another gallery example rewritten with the fluent API.
+
+There is also [A Bar Plot With 2 Variables](notebooks/bar-plot-with-2-variables.qmd),
+adapted to use Polars for the data preparation step.
+
+For a broader walkthrough, see [Geometric Objects](notebooks/geometric-objects.qmd),
+which condenses the plotnine guide page into a fluent-API notebook.
+
+You can also read [Aesthetic Mappings](notebooks/aesthetic-mappings.qmd) for a
+focused guide to global, local, and grouped `aes()` usage.
+
+[Scales, Legends, and Guides](notebooks/scale-basics.qmd) covers scale types,
+manual values, breaks, limits, and guide customization in the same fluent style.
+
+[Facets (Subplots)](notebooks/facets.qmd) shows `facet_wrap()`, `facet_grid()`,
+formula syntax, and freeing axes.

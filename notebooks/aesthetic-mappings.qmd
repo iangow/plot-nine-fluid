@@ -1,0 +1,144 @@
+---
+title: "Aesthetic Mappings"
+format:
+  html:
+    code-tools: true
+jupyter: python3
+---
+
+This notebook adapts the plotnine guide on aesthetic mappings to the fluent API
+style.
+
+```{python}
+import polars as pl
+from plotnine import aes, ggplot
+from plotnine.data import penguins
+```
+
+## Setup
+
+```{python}
+penguins = pl.from_pandas(penguins)
+penguins.head()
+```
+
+## Basics
+
+The simplest mapping sends columns to the x- and y-axes at the plot level.
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(x="flipper_length_mm", y="body_mass_g")
+    .geom_point()
+)
+```
+
+## Variable Mappings
+
+### Color
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(x="flipper_length_mm", y="body_mass_g", color="species")
+    .geom_point()
+)
+```
+
+### Shape
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(x="flipper_length_mm", y="body_mass_g", shape="species")
+    .geom_point()
+)
+```
+
+### Size and Alpha
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(
+        x="flipper_length_mm",
+        y="body_mass_g",
+        size="body_mass_g",
+        alpha="body_mass_g",
+    )
+    .geom_point()
+)
+```
+
+## Literal Mappings
+
+Literal values are set directly on the geom, not inside `aes()`.
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(x="flipper_length_mm", y="body_mass_g")
+    .geom_point(size=7, alpha=0.5, color="purple")
+)
+```
+
+## `aes()` Inside a Specific Geom
+
+Layer-local mappings apply to only that geom.
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(x="flipper_length_mm", y="body_mass_g")
+    .geom_point(aes(color="species"), size=5)
+    .geom_point(aes(shape="species"))
+)
+```
+
+## Collective Groupings
+
+### Explicit Grouping
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(x="flipper_length_mm", y="body_mass_g", group="species")
+    .geom_point()
+    .geom_smooth(method="lm")
+)
+```
+
+### Automatic Grouping Through Color
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(x="flipper_length_mm", y="body_mass_g", color="species")
+    .geom_point()
+    .geom_smooth(method="lm")
+)
+```
+
+### Working Around Automatic Grouping
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(x="flipper_length_mm", y="body_mass_g")
+    .geom_point(aes(color="species"))
+    .geom_smooth(method="lm")
+)
+```
+
+## Mappings With Expressions
+
+Mappings in `aes()` can also be expressions.
+
+```{python}
+(
+    ggplot(penguins)
+    .aes(x="bill_length_mm / bill_depth_mm", y="body_mass_g")
+    .geom_point(aes(color="species"))
+)
+```

@@ -1,0 +1,247 @@
+---
+title: "Geometric Objects"
+format:
+  html:
+    code-tools: true
+jupyter: python3
+---
+
+This notebook adapts the plotnine guide on geometric objects to the fluent API
+style. Where the original page uses pandas-based wrangling, this version uses
+Polars.
+
+```{python}
+import polars as pl
+import plotnine as p9
+from plotnine import ggplot, aes
+from plotnine.data import diamonds, huron, mpg
+```
+
+## Setup
+
+```{python}
+mpg = pl.from_pandas(mpg)
+huron = pl.from_pandas(huron)
+diamonds = pl.from_pandas(diamonds)
+
+mpg.head()
+```
+
+## Basic Use
+
+Geom functions determine how mapped data becomes visible marks. Layers are drawn
+in the order they are added.
+
+```{python}
+(
+    ggplot(mpg)
+    .aes("displ", "hwy")
+    .geom_point(aes(fill="class"), size=5)
+    .geom_point(aes(shape="class"))
+)
+```
+
+## Individual Geoms
+
+### Scatterplot With Text
+
+```{python}
+highest_mpg = (
+    mpg
+    .filter(
+        pl.col("hwy") == pl.col("hwy").max(), 
+        pl.col("cty") == pl.col("cty").max()
+    )
+)
+
+(
+    ggplot(mpg)
+    .aes("cty", "hwy")
+    .geom_point()
+    .geom_text(
+        aes(label="model"),
+        nudge_y=-2,
+        nudge_x=-1,
+        data=highest_mpg,
+    )
+)
+```
+
+### Barchart on Counts
+
+```{python}
+(
+    mpg
+    .group_by("class", "drv").len()
+    .rename({"len": "count"})
+    >>
+    ggplot()
+    .aes("class", "count", fill="drv")
+    .geom_col()
+)
+```
+
+### Rectangles
+
+```{python}
+(
+    pl.DataFrame(
+        {
+            "xmin": [1, 2, 3],
+            "ymin": [1, 2, 3],
+            "xmax": [2, 3, 4],
+            "ymax": [2, 3, 4],
+        }
+    )
+    >>
+    ggplot()
+    .aes(xmin="xmin", ymin="ymin", xmax="xmax", ymax="ymax")
+    .geom_rect(fill="orange")
+)
+```
+
+## Collective Geoms for Distributions
+
+### Boxplots and Violins
+
+```{python}
+selected_classes = ["2seater", "compact", "midsize"]
+mpg_box = mpg.filter(pl.col("class").is_in(selected_classes))
+mpg_violin = mpg.filter(~pl.col("class").is_in(selected_classes))
+
+(
+    ggplot()
+    .aes("class", "cty")
+    .geom_boxplot(data=mpg_box, fill="orange")
+    .geom_violin(data=mpg_violin, fill="lightblue")
+)
+```
+
+### Histograms and Densities
+
+```{python}
+(
+    ggplot(mpg)
+    .aes("cty")
+    .geom_histogram()
+)
+```
+
+```{python}
+(
+    ggplot(mpg)
+    .aes("cty")
+    .geom_density(fill="lightblue")
+)
+```
+
+### Smoothing
+
+```{python}
+(
+    ggplot(mpg)
+    .aes("displ", "hwy")
+    .geom_point()
+    .geom_smooth(method="lm", color="blue", fill="orange")
+)
+```
+
+## Collective Geoms for Lines and Fills
+
+```{python}
+(
+    ggplot(huron)
+    .aes("year", "level")
+    .geom_line()
+    .geom_point()
+)
+```
+
+```{python}
+(
+    ggplot(huron)
+    .aes("year", "level")
+    .geom_ribbon(aes(ymax="level"), ymin=0, fill="lightblue")
+    .geom_point()
+)
+```
+
+## Position Adjustments
+
+### Jitter With Random Noise
+
+```{python}
+(
+    ggplot(mpg)
+    .aes("cty", "hwy")
+    .geom_point(alpha=0.2)
+)
+```
+
+```{python}
+(
+    ggplot(mpg)
+    .aes("cty", "hwy")
+    .geom_point(position=p9.position_jitter())
+)
+```
+
+### Dodge and Fill for Bars
+
+```{python}
+(
+    ggplot(diamonds)
+    .aes("color", fill="cut")
+    .add_theme(legend_position="none")
+    .geom_bar()
+)
+```
+
+```{python}
+(
+    ggplot(diamonds)
+    .aes("color", fill="cut")
+    .add_theme(legend_position="none")
+    .geom_bar(position=p9.position_fill())
+)
+```
+
+```{python}
+(
+    ggplot(diamonds)
+    .aes("color", fill="cut")
+    .add_theme(legend_position="none")
+    .geom_bar(position=p9.position_dodge())
+)
+```
+
+## Statistical Transformations
+
+```{python}
+(
+    ggplot(mpg)
+    .aes("trans", "cty")
+    .geom_point()
+    .geom_point(
+        aes(group="trans"),
+        color="red",
+        size=3,
+        stat="summary",
+        fun_y=lambda x: x.mean(),
+    )
+)
+```
+
+```{python}
+mean_mpg = mpg.group_by("trans").agg(pl.col("cty").mean())
+mean_mpg
+```
+
+```{python}
+(
+    ggplot(mpg)
+    .aes("trans", "cty")
+    .geom_point()
+    .geom_point(data=mean_mpg, color="red", size=3)
+)
+```
