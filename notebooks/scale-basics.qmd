@@ -136,10 +136,12 @@ df_identity = pl.DataFrame(
 
 ```{python}
 keep_classes = ["2seater", "compact", "midsize"]
-filtered_mpg = mpg.filter(pl.col("class").is_in(keep_classes))
 
 (
-    ggplot(filtered_mpg)
+    mpg
+    .filter(pl.col("class").is_in(keep_classes))
+    >>
+    ggplot()
     .aes("displ", "hwy", shape="factor(cyl)")
     .geom_point()
     .scale_shape_manual(values=[".", "o", "v", ">"])
