@@ -4,25 +4,75 @@ title: "plotnine-fluid"
 
 # plotnine-fluid
 
-This site is a small home for plotnine examples built as Quarto notebooks.
+`plotnine-fluid` is a small Quarto site for experimenting with the fluent
+`plotnine` API. The notebooks here adapt examples from the plotnine gallery and
+guide pages, with Polars used where it makes the data prep cleaner.
 
-Start with [Anscombe's Quartet](notebooks/anscombes-quartet.qmd), adapted from the
-plotnine gallery.
+## Gallery Adaptations
 
-You can also explore [Please, I Want Some More Labels](notebooks/please-i-want-some-more-labels.qmd),
-another gallery example rewritten with the fluent API.
+::: {.columns}
+::: {.column width="50%"}
+### [Anscombe's Quartet](notebooks/anscombes-quartet.qmd)
 
-There is also [A Bar Plot With 2 Variables](notebooks/bar-plot-with-2-variables.qmd),
-adapted to use Polars for the data preparation step.
+Recreates Anscombe's classic quartet with `plotnine`, `polars`, and
+`scikit-learn`, including faceted regression lines and a polished final chart.
+:::
 
-For a broader walkthrough, see [Geometric Objects](notebooks/geometric-objects.qmd),
-which condenses the plotnine guide page into a fluent-API notebook.
+::: {.column width="50%"}
+### [Please, I Want Some More Labels](notebooks/please-i-want-some-more-labels.qmd)
 
-You can also read [Aesthetic Mappings](notebooks/aesthetic-mappings.qmd) for a
-focused guide to global, local, and grouped `aes()` usage.
+Shows how to add titles, subtitles, captions, and legend labels in a fluent
+`plotnine` workflow.
+:::
+:::
 
-[Scales, Legends, and Guides](notebooks/scale-basics.qmd) covers scale types,
-manual values, breaks, limits, and guide customization in the same fluent style.
+::: {.columns}
+::: {.column width="50%"}
+### [A Bar Plot With 2 Variables](notebooks/bar-plot-with-2-variables.qmd)
 
-[Facets (Subplots)](notebooks/facets.qmd) shows `facet_wrap()`, `facet_grid()`,
-formula syntax, and freeing axes.
+Builds a grouped bar chart step by step, using Polars for the data and
+layer-specific label mappings for the dodged text annotations.
+:::
+
+::: {.column width="50%"}
+### [Facets (Subplots)](notebooks/facets.qmd)
+
+Demonstrates `facet_wrap()`, `facet_grid()`, formula syntax, and free scales in
+a compact subplot-focused notebook.
+:::
+:::
+
+## Guide Adaptations
+
+::: {.columns}
+::: {.column width="50%"}
+### [Geometric Objects](notebooks/geometric-objects.qmd)
+
+Condenses the plotnine geoms guide into a notebook covering points, bars,
+rectangles, lines, ribbons, distributions, position adjustments, and summaries.
+:::
+
+::: {.column width="50%"}
+### [Aesthetic Mappings](notebooks/aesthetic-mappings.qmd)
+
+Focuses on global versus layer-local `aes()`, literal settings, grouping, and
+expression-based mappings.
+:::
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+### [Scales, Legends, and Guides](notebooks/scale-basics.qmd)
+
+Covers manual scales, breaks, labels, limits, legend merging, guide placement,
+and guide customization in the fluent API style.
+:::
+
+::: {.column width="50%"}
+### Source Material
+
+Most notebooks on this site are adapted from the official
+[plotnine gallery](https://plotnine.org/gallery/) and
+[plotnine guides](https://plotnine.org/guide/).
+:::
+:::
